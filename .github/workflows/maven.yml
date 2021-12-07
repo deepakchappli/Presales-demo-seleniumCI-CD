@@ -1,17 +1,18 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
 name: Java CI with Maven
 
 on:
   push:
-    branches: [ main ]
+    branches: 
+      - '**'
   pull_request:
-    branches: [ main ]
+    branches: 
+      - '**'
     
 env:
     APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-    APPLITOOLS_BATCH_ID: ${{ github.sha }}
+    APPLITOOLS_BATCH_ID: ${{ github.event.pull_request.head.sha }}
     
 jobs:
   run-tests:
@@ -27,3 +28,12 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
       
+  batch-completion-notification:
+    needs: run-tests
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Applitools batch status 
+        uses: wei/curl@v1.1.1
+        with:
+          args: -d "" -X POST https://eyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
