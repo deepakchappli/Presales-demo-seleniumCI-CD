@@ -46,11 +46,12 @@ public class synapse{
 
     public static void setUp(Eyes eyes) {
 
+        String API_Key = System.getenv("APPLITOOLS_API_KEY");
         // Initialize eyes Configuration
         Configuration config = eyes.getConfiguration();
 
         // You can get your api key from the Applitools dashboard
-        config.setApiKey("eAcV2Ms8Z1Lno7dlbQL9es9QpxWCkMKL34RlXRLNPik110"); //My API key
+        //config.setApiKey("eAcV2Ms8Z1Lno7dlbQL9es9QpxWCkMKL34RlXRLNPik110"); //My API key
         //config.setApiKey("Ukw1VB3104G0A4ur0h2cvy7eLXzXrjd3YLi4yWUs19vW4110"); //Presales Key
 
         // create a new batch info instance and set it to the configuration
