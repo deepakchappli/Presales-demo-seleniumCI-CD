@@ -5,9 +5,11 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ main ]
+    branches: 
+      - '**'
   pull_request:
-    branches: [ main ]
+    branches: 
+      - '**'
     
 env:
     APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
