@@ -27,6 +27,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      run: echo "Hello $APPLITOOLS_BATCH_ID, $APPLITOOLS_API_KEY, today is Monday!"
       
   batch-completion-notification:
     needs: run-tests
