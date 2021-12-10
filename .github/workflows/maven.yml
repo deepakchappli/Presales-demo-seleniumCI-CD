@@ -11,7 +11,7 @@ on:
       - '**'
     
 env:
-    APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+    APPLITOOLS_API_KEY: Ukw1VB3104G0A4ur0h2cvy7eLXzXrjd3YLi4yWUs19vW4110
     APPLITOOLS_BATCH_ID: ${{ github.sha }}
     
     
@@ -36,7 +36,11 @@ jobs:
     needs: run-tests
     if: always()
     runs-on: ubuntu-latest
+
+      
     steps:
+
+      
       - name: Update Applitools batch status 
         uses: wei/curl@v1.1.1
         with:
